@@ -17,6 +17,14 @@ class MemoryManager {
         // Find the worst (largest) free block
         int worstBlockIndex = findWorstFreeBlock();
 
+        if (requestSize == 0) {
+            return new AllocationResult(false, -1, "Invalid request size");
+        }
+
+        if (requestSize < 0) {
+            return new AllocationResult(false, -1, "Invalid request size");
+        }
+
         if (worstBlockIndex == -1) {
             return new AllocationResult(false, -1, "No suitable block found");
         }
